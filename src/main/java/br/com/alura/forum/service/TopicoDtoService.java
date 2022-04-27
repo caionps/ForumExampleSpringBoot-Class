@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import br.com.alura.forum.controller.dto.DetalhesDoTopicoDto;
 import br.com.alura.forum.controller.dto.TopicoDto;
 import br.com.alura.forum.controller.form.TopicoForm;
 import br.com.alura.forum.modelo.Topico;
@@ -40,9 +41,9 @@ public class TopicoDtoService {
 		return new TopicoDto(topico);
 	}
 	
-	public TopicoDto detalhar(@PathVariable Long id) {
+	public DetalhesDoTopicoDto detalhar(Long id) {
 		
 		Topico topico = topicoRepository.getOne(id);
-		return new TopicoDto(topico);
+		return new DetalhesDoTopicoDto(topico);
 	}
 }

@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import br.com.alura.forum.modelo.StatusTopico;
 import br.com.alura.forum.modelo.Topico;
 
-public class DetalheDoTopicoDto {
+public class DetalhesDoTopicoDto {
 	
 	private Long id;
 	private String titulo;
