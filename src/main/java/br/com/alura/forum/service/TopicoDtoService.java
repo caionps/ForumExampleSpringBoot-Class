@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import br.com.alura.forum.controller.dto.TopicoDto;
 import br.com.alura.forum.controller.form.TopicoForm;
@@ -36,6 +37,12 @@ public class TopicoDtoService {
 	public TopicoDto cadastrar(TopicoForm form) {
 		Topico topico = topicoFormService.converter(form);
 		topicoRepository.save(topico);
+		return new TopicoDto(topico);
+	}
+	
+	public TopicoDto detalhar(@PathVariable Long id) {
+		
+		Topico topico = topicoRepository.getOne(id);
 		return new TopicoDto(topico);
 	}
 }
