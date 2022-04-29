@@ -1,6 +1,5 @@
 package br.com.alura.forum.controller;
 
-import java.net.URI;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -22,9 +21,6 @@ import br.com.alura.forum.controller.dto.DetalhesDoTopicoDto;
 import br.com.alura.forum.controller.dto.TopicoDto;
 import br.com.alura.forum.controller.form.AtualizacaoTopicoForm;
 import br.com.alura.forum.controller.form.TopicoForm;
-import br.com.alura.forum.modelo.Topico;
-import br.com.alura.forum.repository.CursoRepository;
-import br.com.alura.forum.repository.TopicoRepository;
 import br.com.alura.forum.service.TopicoDtoService;
 import br.com.alura.forum.service.TopicoFormService;
 
@@ -34,9 +30,6 @@ public class TopicosController {
 	
 	@Autowired
 	private TopicoDtoService topicoDtoService;
-	
-	@Autowired 
-	private TopicoRepository topicoRepository;
 	
 	@Autowired
 	private TopicoFormService topicoFormService;
