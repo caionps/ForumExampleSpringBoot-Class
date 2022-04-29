@@ -1,8 +1,10 @@
 package br.com.alura.forum.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -18,10 +20,7 @@ public class TopicoDtoService {
 	
 	@Autowired
 	private TopicoRepository topicoRepository;
-	
-	@Autowired
-	private CursoRepository cursoRepository;
-	
+		
 	@Autowired
 	private TopicoFormService topicoFormService;
 
@@ -41,9 +40,13 @@ public class TopicoDtoService {
 		return new TopicoDto(topico);
 	}
 	
-	public DetalhesDoTopicoDto detalhar(Long id) {
+	public ResponseEntity<DetalhesDoTopicoDto> detalhar(Long id) {
 		
-		Topico topico = topicoRepository.getOne(id);
-		return new DetalhesDoTopicoDto(topico);
+		Optional<Topico> topico = topicoRepository.findById(id);
+		if (topico.isPresent()) {
+		return ResponseEntity.ok(new DetalhesDoTopicoDto(topico.get()));
+		}
+		
+		return ResponseEntity.notFound().build();
 	}
 }

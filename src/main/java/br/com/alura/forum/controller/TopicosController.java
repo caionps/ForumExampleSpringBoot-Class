@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,7 @@ import br.com.alura.forum.modelo.Topico;
 import br.com.alura.forum.repository.CursoRepository;
 import br.com.alura.forum.repository.TopicoRepository;
 import br.com.alura.forum.service.TopicoDtoService;
+import br.com.alura.forum.service.TopicoFormService;
 
 @RestController
 @RequestMapping("/topicos")
@@ -33,7 +35,11 @@ public class TopicosController {
 	@Autowired
 	private TopicoDtoService topicoDtoService;
 	
-	@Autowired TopicoRepository topicoRepository;
+	@Autowired 
+	private TopicoRepository topicoRepository;
+	
+	@Autowired
+	private TopicoFormService topicoFormService;
 	
 	
 	@GetMapping
@@ -44,6 +50,7 @@ public class TopicosController {
 	 
 	
 	@PostMapping("/cadastrar")
+	@Transactional
 	public TopicoDto cadastrar(@RequestBody @Valid TopicoForm form, UriComponentsBuilder uriBuilder) {
 		/*
 		 * Topico topico = form.converter(cursoRepository);
@@ -58,17 +65,25 @@ public class TopicosController {
 	}
 	
 	@GetMapping("/{id}")
-	public DetalhesDoTopicoDto detalhar(@PathVariable Long id) {
-			
+	public ResponseEntity<DetalhesDoTopicoDto> detalhar(@PathVariable Long id) {
+		
 		return topicoDtoService.detalhar(id);
 	}
 		
 	@PutMapping("/{id}")
 	@Transactional
 	public ResponseEntity<TopicoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoTopicoForm form) {
-		Topico topico = form.atualizar(id, topicoRepository);
 		
-		return ResponseEntity.ok(new TopicoDto(topico));
+				
+		
+		return topicoFormService.atualizar(id, form);
 	}
-
+	
+	@DeleteMapping("/{id}")
+	@Transactional
+	public ResponseEntity<?> remover(@PathVariable Long id) {
+		
+		return topicoFormService.remover(id);
+	}
+	
 }
