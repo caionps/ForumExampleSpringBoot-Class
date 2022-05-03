@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.alura.forum.modelo.Topico;
 import br.com.alura.forum.repository.TopicoRepository;
-import br.com.alura.forum.service.TopicoFormService;
+import br.com.alura.forum.service.TopicoService;
 
 public class AtualizacaoTopicoForm {
 	
 	@Autowired
-	private TopicoFormService topicoFormService;
+	private TopicoService topicoService;
 
 	@NotNull @NotEmpty @Length(min = 5)
 	private String titulo;
@@ -32,21 +32,5 @@ public class AtualizacaoTopicoForm {
 	public void setMensagem(String mensagem) {
 		this.mensagem = mensagem;
 	}
-	/*
-	public Topico atualizar(Long id, TopicoRepository topicoRepository) {
-		
-		return topicoFormService.atualizar(id, topicoRepository);
-	}
-	*/
-	/*
-	public Topico atualizar(Long id, TopicoRepository topicoRepository) {
-		Topico topico = topicoRepository.getOne(id);
-		
-		topico.setTitulo(this.titulo);
-		topico.setMensagem(this.mensagem);
-		
-		return topico;
-	}
-	*/
 	
 }

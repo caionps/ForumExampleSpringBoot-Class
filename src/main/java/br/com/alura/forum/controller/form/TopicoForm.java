@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.com.alura.forum.modelo.Curso;
 import br.com.alura.forum.modelo.Topico;
 import br.com.alura.forum.repository.CursoRepository;
-import br.com.alura.forum.service.TopicoFormService;
+
 
 public class TopicoForm {
 

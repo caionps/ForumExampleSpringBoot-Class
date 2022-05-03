@@ -21,46 +21,34 @@ import br.com.alura.forum.controller.dto.DetalhesDoTopicoDto;
 import br.com.alura.forum.controller.dto.TopicoDto;
 import br.com.alura.forum.controller.form.AtualizacaoTopicoForm;
 import br.com.alura.forum.controller.form.TopicoForm;
-import br.com.alura.forum.service.TopicoDtoService;
-import br.com.alura.forum.service.TopicoFormService;
+import br.com.alura.forum.service.TopicoService;
 
 @RestController
 @RequestMapping("/topicos")
 public class TopicosController {
 	
 	@Autowired
-	private TopicoDtoService topicoDtoService;
-	
-	@Autowired
-	private TopicoFormService topicoFormService;
-	
+	private TopicoService topicoService;
 	
 	@GetMapping
 	
 	 public List<TopicoDto> lista(String nomeCurso) { 
-		return topicoDtoService.lista(nomeCurso);
+		return topicoService.lista(nomeCurso);
+		//se definir o nomeCurso aqui muda o if lá em Topico service
 	 }
 	 
 	
 	@PostMapping("/cadastrar")
 	@Transactional
 	public TopicoDto cadastrar(@RequestBody @Valid TopicoForm form, UriComponentsBuilder uriBuilder) {
-		/*
-		 * Topico topico = form.converter(cursoRepository);
-		 * topicoRepository.save(topico);
-		 */
-		/*
-		 * URI uri =
-		 * uriBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
-		 * return ResponseEntity.created(uri).body(new TopicoDto(topico));
-		 */
-		return topicoDtoService.cadastrar(form);
+	
+		return topicoService.cadastrar(form);
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<DetalhesDoTopicoDto> detalhar(@PathVariable Long id) {
 		
-		return topicoDtoService.detalhar(id);
+		return topicoService.detalhar(id);
 	}
 		
 	@PutMapping("/{id}")
@@ -69,14 +57,14 @@ public class TopicosController {
 		
 				
 		
-		return topicoFormService.atualizar(id, form);
+		return topicoService.atualizar(id, form);
 	}
 	
 	@DeleteMapping("/{id}")
 	@Transactional
 	public ResponseEntity<?> remover(@PathVariable Long id) {
 		
-		return topicoFormService.remover(id);
+		return topicoService.remover(id);
 	}
 	
 }
