@@ -62,11 +62,16 @@ public class TopicoService {
 	}
 	
 	public ResponseEntity<TopicoDto> atualizar(Long id, AtualizacaoTopicoForm form) {
-		Topico topico = topicoRepository.getOne(id);
-		topico.setTitulo(form.getTitulo());
-		topico.setMensagem(form.getMensagem());		
 		
-		return ResponseEntity.ok(new TopicoDto(topico));
+		Optional<Topico> optional = topicoRepository.findById(id);
+		if (optional.isPresent()) {
+			Topico topico = topicoRepository.getOne(id);
+			topico.setTitulo(form.getTitulo());
+			topico.setMensagem(form.getMensagem());
+			return ResponseEntity.ok(new TopicoDto(topico));
+			
+		}
+		return ResponseEntity.notFound().build();	
 	}
 	
 	public ResponseEntity<?> remover(Long id) {

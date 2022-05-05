@@ -34,7 +34,7 @@ public class TopicoServiceTest {
 	public void deveriaListarApenasTopicosDoNomeCurso() {
 		String nomeCurso = "";
 		Assert.assertNotNull(topicoService.lista(nomeCurso));
-		Assert.assert
+		//Assert.assert
 		
 	}
 }
